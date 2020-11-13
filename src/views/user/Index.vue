@@ -30,7 +30,7 @@
             <img src="../../assets/img/back-right.png" alt="">
           </div>
         </div>
-        <div class="u-i-title" @click="$router.push('/user/personalHomePage')">
+        <div class="u-i-title" @click="$router.push('/user/personalPage')">
           <img src="../../assets/img/heart-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>个人主页</p>

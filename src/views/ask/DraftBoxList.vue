@@ -3,14 +3,14 @@
     <ModelTitle title="草稿箱" />
     <div class="content-height">
       <List
-        v-model="questionData.loading"
-        :finished="questionData.finished"
+        v-model="draftBoxData.loading"
+        :finished="draftBoxData.finished"
         finished-text="没有更多了"
         @load="onLoad"
       >
-        <div v-for="(v,index) in questionData.data" :key="index" class="drafBox-list">
+        <div v-for="(v,index) in draftBoxData.data" :key="index" class="drafBox-list">
           <div class="p-16">
-            <h3 @click="editClick(v.id)">{{ v.title }}</h3>
+            <h3 @click="editClick(v.id, v.type)">{{ v.title }}</h3>
             <div v-if="v.imgsList && v.imgsList.length === 3" class="d-l-img">
               <div v-for="(i,indexImg) in v.imgsList" :key="indexImg">
                 <img :src="i" alt="">
@@ -34,7 +34,7 @@ export default {
   components: { ModelTitle, List },
   data() {
     return {
-      questionData: {
+      draftBoxData: {
         loading: false,
         finished: false,
         data: [],
@@ -57,34 +57,34 @@ export default {
       })
     },
     formatTime,
-    editClick(id) {
+    editClick(id, type) {
       this.$router.push({
-        path: '/ask/publishAnswer',
+        path: type === '2' ? '/ask/publishAnswer' : type === '1' ? '/ask/publishVideo' : '',
         query: { id: id }
       })
     },
     onLoad() {
-      if (this.questionData.finished) {
+      if (this.draftBoxData.finished) {
         return
       }
-      this.questionData.loading = true
-      this.questionData.pageNumber++
+      this.draftBoxData.loading = true
+      this.draftBoxData.pageNumber++
       this.$api.ask
         .findPersonalPage({
-          pageNumber: this.questionData.pageNumber,
-          pageSize: this.questionData.pageSize,
+          pageNumber: this.draftBoxData.pageNumber,
+          pageSize: this.draftBoxData.pageSize,
           userId: this.$store.state.user.userId,
           state: 0
         })
         .then(res => {
           if (res.status === 'SUCCESS') {
             console.log(res)
-            this.questionData.data = this.questionData.data.concat(res.data.data) // 追加数据
+            this.draftBoxData.data = this.draftBoxData.data.concat(res.data.data) // 追加数据
           }
-          this.questionData.loading = false
+          this.draftBoxData.loading = false
           // 数据全部加载完成
           if (res.data.data.length === 0) {
-            this.questionData.finished = true
+            this.draftBoxData.finished = true
           }
         })
     }

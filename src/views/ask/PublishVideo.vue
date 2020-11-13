@@ -46,9 +46,23 @@ export default {
       productPicList: []
     }
   },
+  created() {
+    // 获取 链接里的id
+    if (this.id) {
+      this.findOneDetail()
+    }
+  },
   methods: {
+    // 编辑获取数据
+    findOneDetail() {
+      this.$api.ask.findOneDetail({ id: this.id }).then(res => {
+        if (res.status === 'SUCCESS') {
+          this.form = res.data
+        }
+      })
+    },
     publishDraft(type) {
-      if (this.form.title === '') {
+      if (this.form.title === '' || this.form.videoUrl === '') {
         Toast('请输入问题标题')
         return
       }
@@ -67,8 +81,8 @@ export default {
       })
     },
     saveInfo(type) {
-      if (this.form.title === '') {
-        Toast('请输入问题标题')
+      if (this.form.title === '' || this.form.videoUrl === '') {
+        Toast('请输入以上内容')
         return
       }
       const pics = this.productPicList.map(p => p.url)

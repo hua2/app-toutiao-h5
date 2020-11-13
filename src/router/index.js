@@ -205,9 +205,9 @@ const router = new Router({
       }
     },
     {
-      path: '/user/personalHomePage',
+      path: '/user/personalPage',
       component: () =>
-          import(/* webpackChunkName: "user_personalHomePage" */ '@/views/user/PersonalPage.vue'),
+          import(/* webpackChunkName: "user_personalPage" */ '@/views/user/PersonalPage.vue'),
       meta: {
         title: '个人主页'
       }

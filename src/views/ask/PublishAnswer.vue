@@ -129,7 +129,7 @@ export default {
       return true
     },
     afterRead(e) {
-      // this.productPicList = this.productPicList.filter(f => f.url)
+      this.productPicList = this.productPicList.filter(f => f.url)
       Toast.loading({
         duration: 0,
         mask: true,
@@ -151,7 +151,7 @@ export default {
             const fileIndex = this.productPicList.findIndex(
               a => a.file === e.file
             )
-            this.productPicList.splice(fileIndex, 1)
+            this.productPicList.splice(fileIndex, 0)
           }
           console.log(this.productPicList)
         })
