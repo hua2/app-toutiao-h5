@@ -75,17 +75,32 @@ export default {
         Toast('请输入问题标题')
         return
       }
-      this.$api.ask.publishDraft({
-        ...this.form,
-        type: type,
-        uid: this.$store.state.user.userId,
-        state: 0
-      }).then(res => {
-        if (res.status === 'SUCCESS') {
-          Toast('发布成功')
-          this.$router.push('/ask/draftBoxList')
-        }
-      })
+      if (!this.id) {
+        this.$api.ask.publishDraft({
+          ...this.form,
+          type: type,
+          uid: this.$store.state.user.userId,
+          state: 0
+        }).then(res => {
+          if (res.status === 'SUCCESS') {
+            Toast('发布成功')
+            this.$router.push('/ask/draftBoxList')
+          }
+        })
+      } else {
+        this.$api.ask.publishDraft({
+          ...this.form,
+          type: type,
+          uid: this.$store.state.user.userId,
+          state: 0,
+          id: this.id
+        }).then(res => {
+          if (res.status === 'SUCCESS') {
+            Toast('修改成功')
+            this.$router.push('/ask/draftBoxList')
+          }
+        })
+      }
     },
     saveInfo(type) {
       if (this.form.title === '' || this.form.videoUrl === '') {

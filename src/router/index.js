@@ -157,6 +157,14 @@ const router = new Router({
       }
     },
     {
+      path: '/ask/publishArticle',
+      component: () =>
+          import(/* webpackChunkName: "ask_publishArticle" */ '@/views/ask/PublishArticle.vue'),
+      meta: {
+        title: '文章'
+      }
+    },
+    {
       path: '/ask/details',
       component: () =>
           import(/* webpackChunkName: "ask_details" */ '@/views/ask/Details.vue'),

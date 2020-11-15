@@ -31,7 +31,7 @@
             <span @click="$router.push('/ask/draftBoxList')">草稿箱</span>
           </div>
           <div class="flex justify-around">
-            <div class="p-b-pic">
+            <div class="p-b-pic" @click="$router.push('/ask/publishArticle')">
               <img src="../../assets/image/article-pub-icon.png" alt="">
               <p>发文章</p>
             </div>

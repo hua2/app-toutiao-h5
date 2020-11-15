@@ -67,7 +67,7 @@ export default {
         }
       })
     },
-    // 发布 编辑
+    // 发布 编辑草稿箱
     publishDraft(type) {
       if (this.form.title === '') {
         Toast('请输入问题标题')
