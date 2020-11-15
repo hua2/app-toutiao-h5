@@ -17,7 +17,6 @@
               </div>
             </div>
             <p>{{ formatTime(v.createDate) }} {{ v.type ===2 ?'提问':v.type===1?'视频' :'文章' }}</p>
-            <span @click="deleteDraftBox(v.id)">删除</span>
           </div>
         </div>
       </List>
@@ -47,19 +46,11 @@ export default {
     this.onLoad()
   },
   methods: {
-    deleteDraftBox(id) {
-      this.$api.app.deleteDraftBox({
-        id: id
-      }).then(res => {
-        if (res.status === 'SUCCESS') {
-          // this.onLoad()
-        }
-      })
-    },
     formatTime,
     editClick(id, type) {
+      console.log(type)
       this.$router.push({
-        path: type === '2' ? '/ask/publishAnswer' : type === '1' ? '/ask/publishVideo' : '',
+        path: type === 2 ? '/ask/publishAnswer' : type === 1 ? '/ask/publishVideo' : '',
         query: { id: id }
       })
     },

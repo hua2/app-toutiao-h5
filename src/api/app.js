@@ -59,15 +59,6 @@ const app = {
         headers: { 'jm-token': store.state.user.token }
       }
     )
-  },
-  // 作品管理-删除草稿箱
-  deleteDraftBox(data) {
-    return axios.post(
-      `/jm-information-service/JmMedia/delete`, data,
-      {
-        headers: { 'jm-token': store.state.user.token }
-      }
-    )
   }
 }
 export default app

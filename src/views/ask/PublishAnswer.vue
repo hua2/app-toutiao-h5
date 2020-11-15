@@ -20,11 +20,10 @@
           :before-read="beforeRead"
           :after-read="afterRead"
           class="mt-16"
-          @delete="afterDelete"
         />
       </div>
       <div class="flex justify-center">
-        <Button size="small" class="mr-12" @click="publishDraft('2')">存草稿</Button>
+        <Button size="small" @click="publishDraft('2')">存草稿</Button>
         <Button size="small" @click="saveInfo('2')">发布</Button>
       </div>
     </div>
@@ -108,7 +107,7 @@ export default {
         return
       }
       const pics = this.productPicList.map(p => p.url)
-      this.form.imgsList = pics.toString()
+      this.form.imgsList = pics
       this.$api.ask.publishAskMedia({
         ...this.form,
         type: type,
@@ -129,7 +128,6 @@ export default {
       return true
     },
     afterRead(e) {
-      this.productPicList = this.productPicList.filter(f => f.url)
       Toast.loading({
         duration: 0,
         mask: true,
@@ -139,29 +137,21 @@ export default {
         .uploadPicture(e.file, '4')
         .then(res => {
           Toast.clear()
-
+          const fileIndex = this.productPicList.findIndex(
+            a => a.file === e.file
+          )
           if (res.status === 'SUCCESS') {
-            this.productPicList.push({
-              file: e.file,
-              url: res.data
-            })
+            this.productPicList[fileIndex].url = res.data
           }
           if (res.status === 'FAIL') {
             Toast('图片上传失败！')
-            const fileIndex = this.productPicList.findIndex(
-              a => a.file === e.file
-            )
-            this.productPicList.splice(fileIndex, 0)
+            this.productPicList.splice(fileIndex, 1)
           }
           console.log(this.productPicList)
         })
         .catch(() => {
           Toast.clear()
         })
-    },
-    afterDelete(e) {
-      const fileIndex = this.productPicList.findIndex(a => a.file === e.file)
-      this.productPicList.splice(fileIndex, 1)
     }
 
   }
@@ -170,6 +160,9 @@ export default {
 
 <style scoped lang="scss">
 .push-answer{
+/deep/.van-button--small{
+    margin-right: 12px;
+}
   .p-a-upload{
     align-items: center;
     margin-bottom: 32px;
