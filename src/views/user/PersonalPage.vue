@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="p-h-list">
         <h4>全部</h4>
         <AllModal :id="detailData.id" />
       </div>
@@ -88,8 +88,9 @@ export default {
 <style scoped lang="scss">
 .p-h-page{
   width: 100%;
+  height: 100%;
   .p-h-logo{
-padding: 16px;
+    padding: 16px;
     height: 120px;
     border-bottom: 4px solid #f1f2f6;
     .p-h-num{
@@ -112,9 +113,12 @@ padding: 16px;
         font-size: 11px;
       }
   }
-  h4{
-    font-size: 24px;
-    padding: 8px 0 0 16px;
+  .p-h-list{
+    height: calc(100% - 120px);
+    h4{
+      font-size: 24px;
+      padding: 8px 0 0 16px;
+    }
   }
 }
 

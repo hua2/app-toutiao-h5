@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="all-modal">
     <List
       v-model="personalData.loading"
       :finished="personalData.finished"
@@ -9,7 +9,7 @@
       <div
         v-for="(re, index) in personalData.data"
         :key="index"
-        class="all-modal"
+        class="a-m-list"
       >
         <div class="flex justify-between items-center">
           <div @click="gotoDetail(re.id)">
@@ -79,6 +79,7 @@ export default {
           if (res.data.data.length === 0) {
             this.personalData.finished = true
           }
+          console.log(this.personalData)
         })
     }
   }
@@ -87,24 +88,28 @@ export default {
 
 <style scoped lang="scss">
 .all-modal{
-    padding: 16px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #f1f2f6;
-    h3{
-      font-size: 16px;
-      margin-bottom: 12px;
-      width: 100%;
-      line-height: 18px;
-    }
-    h4{
-      font-size: 16px;
-      margin-bottom: 12px;
-      width: 100%;
-      line-height: 18px;
-    }
-    .a-m-author{
-      color: #999999;
-      font-size: 11px;
-    }
+  height: calc(100% - 45px);
+  overflow-y: auto;
+  .a-m-list{
+      padding: 16px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #f1f2f6;
+      h3{
+        font-size: 16px;
+        margin-bottom: 12px;
+        width: 100%;
+        line-height: 18px;
+      }
+      h4{
+        font-size: 16px;
+        margin-bottom: 12px;
+        width: 100%;
+        line-height: 18px;
+      }
+      .a-m-author{
+        color: #999999;
+        font-size: 11px;
+      }
+  }
 }
 </style>

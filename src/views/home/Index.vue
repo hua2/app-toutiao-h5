@@ -54,7 +54,7 @@
           v-for="(trade, index) in tradeData"
           :key="index"
           :title="trade.title"
-          :name="trade.title"
+          :name="trade.id"
         >
           <Equipment :id="trade.id" />
         </Tab>
@@ -105,9 +105,10 @@ export default {
       this.show = true
     },
     onSearch(val) {
+      const column = this.tradeData[this.active - 1]
       this.$router.push({
         path: '/search',
-        query: { keyword: val }
+        query: { keyword: val, columnId: column ? column.id : null }
       })
     },
     onCancel(val) {

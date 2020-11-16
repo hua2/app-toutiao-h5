@@ -139,8 +139,10 @@ export default {
       this.show = true
     },
     onSearch() {
-      // this.videoListData.pageNumber = 0
-      // this.onLoad()
+      this.videoListData.data = []
+      this.videoListData.pageNumber = 0
+      this.videoListData.finished = false
+      this.onLoad()
     },
     onCancel(val) {
       Toast(val)

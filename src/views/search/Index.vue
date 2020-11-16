@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="search">
     <ModelTitle title="搜索列表" />
     <div class="content-height">
       <List
@@ -11,7 +11,7 @@
         <div
           v-for="(re, index) in searchData.data"
           :key="index"
-          class="search"
+          class="search-list"
         >
           <div v-if="re.format === 0" class="flex justify-between items-center">
             <div class="r-c-left">
@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       keyword: this.$route.query.keyword,
+      columnId: this.$route.query.columnId,
       searchData: {
         loading: false,
         finished: false,
@@ -85,34 +86,39 @@ export default {
         return
       }
       this.searchData.loading = true
-      this.searchData.pageNumber =
-        (this.searchData.data.length % this.searchData.pageSize) + 1
-      this.$api.home
-        .findMediaIndex({
-          keywords: this.keyword,
-          pageNumber: this.searchData.pageNumber,
-          pageSize: this.searchData.pageSize
-        })
-        .then(res => {
-          if (res.status === 'SUCCESS') {
-            this.searchData.totalPage = res.data.totalPage
-            this.searchData.data = this.searchData.data.concat(res.data.data) // 追加数据
-          }
-          this.searchData.loading = false
-          // 数据全部加载完成
-          if (res.data === null) {
-            this.searchData.finished = true
-          }
-        })
+      this.searchData.pageNumber++
+      let searchMethod = 'findMediaIndex'
+      if (this.columnId) {
+        searchMethod = 'findMediaColumn'
+      }
+      this.$api.home[searchMethod]({
+        columnId: this.columnId,
+        keywords: this.keyword,
+        pageNumber: this.searchData.pageNumber,
+        pageSize: this.searchData.pageSize
+      }).then(res => {
+        if (res.status === 'SUCCESS') {
+          this.searchData.totalPage = res.data.totalPage
+          this.searchData.data = this.searchData.data.concat(res.data.data) // 追加数据
+        }
+        this.searchData.loading = false
+        // 数据全部加载完成
+        if (res.data === null || res.data.data.length === 0) {
+          this.searchData.finished = true
+        }
+      })
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.search {
+.search{
+
   width: 100%;
   height: 100%;
+.search-list {
+  width: 100%;
     padding: 16px;
     margin-bottom: 10px;
     border-bottom: 1px solid #f1f2f6;
@@ -158,5 +164,6 @@ export default {
       color: #999999;
       font-size: 11px;
     }
+}
 }
 </style>
