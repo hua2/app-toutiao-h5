@@ -55,10 +55,6 @@ export default {
     }
   },
   methods: {
-    previewVideo(e) {
-      this.$refs.previewVideo.src = e.url
-      this.showPreviewVideo = true
-    },
     // 编辑获取数据
     findOneDetail() {
       this.$api.ask.findOneDetail({ id: this.id }).then(res => {
@@ -72,7 +68,7 @@ export default {
     },
     publishDraft(type) {
       if (this.form.title === '' || this.form.videoUrl === '') {
-        Toast('请输入问题标题')
+        Toast('请输入以上内容')
         return
       }
       if (!this.id) {
@@ -83,7 +79,6 @@ export default {
           state: 0
         }).then(res => {
           if (res.status === 'SUCCESS') {
-            Toast('发布成功')
             this.$router.push('/ask/draftBoxList')
           }
         })
@@ -165,6 +160,15 @@ export default {
       font-size: 14px;
       margin-right: 8px;
       min-width: 90px;
+      position: relative;
+      padding-left: 16px;
+      &:before{
+        position: absolute;
+        left: 8px;
+        color: #ee0a24;
+        font-size: 14px;
+        content: '*';
+      }
     }
     .van-button,video{
       margin-top: 12px;

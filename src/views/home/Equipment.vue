@@ -11,28 +11,27 @@
           v-for="(re, index) in cateListData.data"
           :key="index"
           class="recommend-common"
-          @click="gotoDetail(re.id)"
         >
           <div v-if="re.format === 0" class="flex justify-between items-center">
             <div class="r-c-left">
-              <h3 class="truncate-3">{{ re.title }}</h3>
-              <div class="r-c-author">{{ re.authorName }} {{ re.commentNum }}评论 {{ formatTime(re.releaseDate) }}</div>
+              <h3 class="truncate-3" @click="gotoDetail(re.id)">{{ re.title }}</h3>
+              <div class="r-c-author"><span @click="authorClick(re.authorId)">{{ re.authorName }}</span> {{ re.commentNum }}评论 {{ formatTime(re.releaseDate) }}</div>
             </div>
-            <div class="r-c-right">
+            <div class="r-c-right" @click="gotoDetail(re.id)">
               <img :src="re.firstImg" alt="">
             </div>
           </div>
           <div v-if="re.format !== 0">
-            <h4 class="truncate-3">{{ re.title }}</h4>
-            <div v-if="re.format === 3" class="r-c-img">
+            <h4 class="truncate-3" @click="gotoDetail(re.id)">{{ re.title }}</h4>
+            <div v-if="re.format === 3" class="r-c-img" @click="gotoDetail(re.id)">
               <img :src="re.firstImg" alt="">
             </div>
-            <div v-if="re.format === 1" class="r-c-pic flex justify-between">
+            <div v-if="re.format === 1" class="r-c-pic flex justify-between" @click="gotoDetail(re.id)">
               <img :src="re.firstImg" alt="">
               <img :src="re.secondImg" alt="">
               <img :src="re.thirdImg" alt="">
             </div>
-            <div class="r-c-author">{{ re.authorName }} {{ re.commentNum }}评论 {{ formatTime(re.releaseDate) }}</div>
+            <div class="r-c-author"><span @click="authorClick(re.authorId)">{{ re.authorName }}</span> {{ re.commentNum }}评论 {{ formatTime(re.releaseDate) }}</div>
           </div>
         </div>
       </div>
@@ -74,6 +73,12 @@ export default {
     this.onLoad()
   },
   methods: {
+    authorClick(id) {
+      this.$router.push({
+        path: '/user/personalPage',
+        query: { id: id }
+      })
+    },
     gotoDetail(id) {
       this.$router.push({
         path: '/detailInfo',

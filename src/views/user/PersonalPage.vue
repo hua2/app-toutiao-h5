@@ -3,27 +3,37 @@
     <ModelTitle title="个人主页" />
     <div class="content-height">
       <div class="p-h-logo flex items-center">
-        <img src="../../assets/image/home-apply.png" alt="">
+        <img :src="detailData.headPicUrl" alt="">
         <div class="p-h-num">
           <div class="flex">
             <div>
-              <span>3</span>
+              <span>{{ detailData.mediaNum }}</span>
               <p>新闻</p>
             </div>
             <div>
-              <span>3</span>
-              <p>新闻</p>
+              <span>{{ detailData.attentionNum }}</span>
+              <p>关注</p>
             </div>
             <div>
-              <span>3</span>
-              <p>新闻</p>
+              <span>{{ detailData.fansNum }}</span>
+              <p>粉丝</p>
             </div>
           </div>
-          <button>关注</button>
+          <div v-if="$store.state.user.userId !== detailData.id">
+            <button
+              v-if="detailData.isAttention === 0"
+              @click="attentionExpert(detailData.id, 1)"
+            >关注</button>
+            <button
+              v-else
+              @click="attentionExpert(detailData.id, 0)"
+            >已关注</button>
+          </div>
         </div>
       </div>
       <div>
-        全部
+        <h4>全部</h4>
+        <AllModal :id="detailData.id" />
       </div>
     </div>
   </div>
@@ -31,9 +41,47 @@
 
 <script>
 import ModelTitle from '@/components/ModelTitle/index'
+import AllModal from '@/views/user/components/AllModal'
 export default {
   name: 'PersonalPage',
-  components: { ModelTitle }
+  components: { AllModal, ModelTitle },
+  data() {
+    return {
+      detailData: {},
+      id: this.$route.query.id
+    }
+  },
+  created() {
+    this.personDetailsInfo()
+  },
+  methods: {
+    personDetailsInfo() {
+      this.$api.user
+        .personDetailsInfo(
+          this.id ? this.id : this.$store.state.user.userId,
+          this.$store.state.user.userId,
+        )
+        .then(res => {
+          if (res.status === 'SUCCESS') {
+            this.detailData = res.data
+          }
+        })
+    },
+    // 关注
+    attentionExpert(id, status) {
+      this.$api.app
+        .attentionAttention({
+          uid: this.$store.state.user.userId,
+          auid: id,
+          isAttention: status
+        })
+        .then(res => {
+          if (res.status === 'SUCCESS') {
+            this.personDetailsInfo()
+          }
+        })
+    }
+  }
 }
 </script>
 
@@ -63,6 +111,10 @@ padding: 16px;
         color: #FA2400;
         font-size: 11px;
       }
+  }
+  h4{
+    font-size: 24px;
+    padding: 8px 0 0 16px;
   }
 }
 

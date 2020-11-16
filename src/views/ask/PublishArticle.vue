@@ -11,8 +11,8 @@
         type="text"
         placeholder="请输入问题(30个字以内)"
       />
-      <QuillEditor class="mt-8" @change="onEditorChange" />
-      <div class="flex justify-center">
+      <QuillEditor class="mt-8" :value="form.content" @change="onEditorChange" />
+      <div class="flex justify-center mt-24">
         <Button size="small" @click="publishDraft('0')">存草稿</Button>
         <Button size="small" @click="saveInfo('0')">发布</Button>
       </div>
@@ -49,10 +49,15 @@ export default {
     },
     // 编辑获取数据
     findOneDetail() {
+      this.$api.ask.findOneDetail({ id: this.id }).then(res => {
+        if (res.status === 'SUCCESS') {
+          this.form = res.data
+        }
+      })
     },
     publishDraft(type) {
       if (this.form.title === '' || this.form.content === '') {
-        Toast('请输入以上内容')
+        Toast('请输入标题与内容')
         return
       }
       if (!this.id) {
@@ -83,7 +88,7 @@ export default {
     },
     saveInfo(type) {
       if (this.form.title === '' || this.form.content === '') {
-        Toast('请输入以上内容')
+        Toast('请输入标题与内容')
         return
       }
       this.$api.ask.publishAskMedia({

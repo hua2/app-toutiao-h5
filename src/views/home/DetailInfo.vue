@@ -147,7 +147,6 @@ export default {
   methods: {
     // 关注
     attentionExpert(id, status) {
-      console.log(id)
       this.$api.app
         .attentionAttention({
           uid: this.$store.state.user.userId,

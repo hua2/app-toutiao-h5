@@ -7,7 +7,7 @@
           <VanImage
             :src="pic.bannerImgUrl"
             height="100%"
-            @click="gotoDetail(pic.bannerJumpId)"
+            @click="openLink(pic)"
           />
         </SwipeItem>
       </Swipe>
@@ -32,18 +32,19 @@
             v-for="(a, index) in askListData.data"
             :key="index"
             class="a-c-info"
-            @click="gotoDetail(a.pid)"
           >
-            <h3 class="truncate-2">{{ a.title }}</h3>
-            <p class="truncate-2">{{ a.contentShorter }}</p>
-            <div v-if="a.imgsList && a.imgsList.length === 3">
-              <div v-for="(i,indexImg) in a.imgsList" :key="indexImg" class="a-c-img">
-                <img :src="i" alt="">
+            <div @click="gotoDetail(a.pid)">
+              <h3 class="truncate-2">{{ a.title }}</h3>
+              <p class="truncate-2">{{ a.contentShorter }}</p>
+              <div v-if="a.imgsList && a.imgsList.length === 3">
+                <div v-for="(i,indexImg) in a.imgsList" :key="indexImg" class="a-c-img">
+                  <img :src="i" alt="">
+                </div>
               </div>
             </div>
             <div class="ask-author flex items-center">
-              <img :src="a.authorLogo" alt="">
-              <span>{{ a.authorName }}</span> <span>{{ a.commentNum }} 评论 </span><span>{{ formatTime(a.releaseDate) }}</span>
+              <img :src="a.authorLogo" alt="" @click="authorClick(a.authorId)">
+              <span @click="authorClick(a.authorId)">{{ a.authorName }}</span> <span>{{ a.commentNum }} 评论 </span><span>{{ formatTime(a.releaseDate) }}</span>
             </div>
           </div>
         </List>
@@ -79,6 +80,12 @@ export default {
     this.onLoad()
   },
   methods: {
+    authorClick(id) {
+      this.$router.push({
+        path: '/user/personalPage',
+        query: { id: id }
+      })
+    },
     formatTime,
     gotoDetail(id) {
       this.$router.push({
@@ -100,6 +107,16 @@ export default {
             this.bannerData = res.data
           }
         })
+    },
+    openLink(b) {
+      if (b.bannerJump === '0') {
+        this.$router.push({
+          path: '/ask/details',
+          query: { id: b.bannerJumpId }
+        })
+      } else {
+        window.open(b.bannerJumpUrl)
+      }
     },
     onLoad() {
       if (this.askListData.finished) {

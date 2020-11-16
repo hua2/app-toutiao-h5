@@ -76,6 +76,13 @@ const ask = {
         headers: { 'jm-token': store.state.user.token }
       }
     )
+  },
+  // 个人中心-全部
+  findPersonalShowPage(data) {
+    return axios.post(
+      `/jm-information-service/JmMedia/findPersonalShowPage`,
+      data
+    )
   }
 }
 export default ask

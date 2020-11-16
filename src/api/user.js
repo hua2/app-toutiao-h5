@@ -27,20 +27,23 @@ const user = {
       }
     )
   },
+  // 用户信息
+  personDetailsInfo(id, userId) {
+    return axios.post(
+      `/jm-user-service/JmAppUserCenter/findDetail`,
+      {},
+      {
+        params: {
+          id,
+          userId
+        }
+      }
+    )
+  },
   // 登录
   login(data) {
     return axios.post(`/jm-user-service/JmAppUser/login`, data)
   },
-  // // 收藏资讯 视频
-  // findCollectPage(data) {
-  //   return axios.post(
-  //     `/jm-information-service/JmInformation/findCollectPage`,
-  //     data,
-  //     {
-  //       headers: { 'jm-token': store.state.user.token }
-  //     }
-  //   )
-  // },
   // 登录-获取验证码
   getMobileIndentifyCode(data) {
     return axios.post(

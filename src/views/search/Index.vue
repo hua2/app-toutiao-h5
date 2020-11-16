@@ -1,6 +1,6 @@
 <template>
-  <div class="search">
-    <ModelTitle title="资讯列表" />
+  <div>
+    <ModelTitle title="搜索列表" />
     <div class="content-height">
       <List
         v-model="searchData.loading"
@@ -8,21 +8,41 @@
         finished-text="没有更多了"
         @load="onLoad"
       >
-        <ModelSearch
-          v-for="(h, index) in searchData.data"
+        <div
+          v-for="(re, index) in searchData.data"
           :key="index"
-          :img="h.firstImg"
-          :title="h.informationTitle"
-          :date="h.releaseDate"
-          :link="gotoDetail(h.id)"
-        />
+          class="search"
+        >
+          <div v-if="re.format === 0" class="flex justify-between items-center">
+            <div class="r-c-left">
+              <h3 class="truncate-3" @click="gotoDetail(re.id)">{{ re.title }}</h3>
+              <div class="r-c-author"><span @click="authorClick(re.authorId)">{{ re.authorName }}</span>
+                {{ re.commentNum }}
+                评论 {{ formatTime(re.releaseDate) }}</div>
+            </div>
+            <div class="r-c-right" @click="gotoDetail(re.id)">
+              <img :src="re.firstImg" alt="">
+            </div>
+          </div>
+          <div v-if="re.format !== 0">
+            <h4 class="truncate-3" @click="gotoDetail(re.id)">{{ re.title }}</h4>
+            <div v-if="re.format === 3" class="r-c-img" @click="gotoDetail(re.id)">
+              <img :src="re.firstImg" alt="">
+            </div>
+            <div v-if="re.format === 1" class="r-c-pic flex justify-between" @click="gotoDetail(re.id)">
+              <img :src="re.firstImg" alt="">
+              <img :src="re.secondImg" alt="">
+              <img :src="re.thirdImg" alt="">
+            </div>
+            <div class="r-c-author"><span @click="authorClick(re.authorId)">{{ re.authorName }}</span> {{ re.commentNum }}评论 {{ formatTime(re.releaseDate) }}</div>
+          </div>
+        </div>
       </List>
     </div>
   </div>
 </template>
 
 <script>
-import ModelSearch from '@/views/search/components/ModelSearch'
 import { formatTime } from '@/utils/time'
 import { List } from 'vant'
 import ModelTitle from '../../components/ModelTitle/index'
@@ -33,7 +53,7 @@ import ModelTitle from '../../components/ModelTitle/index'
  */
 export default {
   name: 'Index',
-  components: { ModelTitle, ModelSearch, List },
+  components: { ModelTitle, List },
   data() {
     return {
       keyword: this.$route.query.keyword,
@@ -49,6 +69,7 @@ export default {
   },
   created() {
     this.onLoad()
+    console.log(this.keyword)
   },
   methods: {
     formatTime,
@@ -67,8 +88,8 @@ export default {
       this.searchData.pageNumber =
         (this.searchData.data.length % this.searchData.pageSize) + 1
       this.$api.home
-        .findInfomationPage({
-          keyword: this.keyword,
+        .findMediaIndex({
+          keywords: this.keyword,
           pageNumber: this.searchData.pageNumber,
           pageSize: this.searchData.pageSize
         })
@@ -92,5 +113,50 @@ export default {
 .search {
   width: 100%;
   height: 100%;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f1f2f6;
+    .r-c-right{
+      img {
+        width: 110px;
+        height: 75px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+    }
+    h3{
+      font-size: 16px;
+      margin-bottom: 12px;
+      width: 225px;
+      line-height: 18px;
+    }
+    h4{
+      font-size: 16px;
+      margin-bottom: 12px;
+      width: 100%;
+      line-height: 18px;
+    }
+    .r-c-img{
+      img{
+        width: 100%;
+        height: 194px;
+        border-radius: 4px;
+        object-fit: cover;
+        margin-bottom: 12px;
+      }
+    }
+    .r-c-pic{
+      img{
+        width: 110px;
+        height: 75px;
+        border-radius: 4px;
+        object-fit: cover;
+        margin-bottom: 12px;
+      }
+    }
+    .r-c-author{
+      color: #999999;
+      font-size: 11px;
+    }
 }
 </style>

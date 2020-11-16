@@ -1,7 +1,7 @@
 <template>
   <div class="ask-details">
     <ModelTitle title="问答" />
-    <div class="a-d-btn">
+    <div class="a-d-btn" @click="replyClick(infoData.id)">
       <img src="../../assets/image/answer-btn.png" alt="">
     </div>
     <div class="content-height">
@@ -71,6 +71,12 @@ export default {
     this.onLoad()
   },
   methods: {
+    replyClick(id) {
+      this.$router.push({
+        path: '/ask/PublishQuestionAnswer',
+        query: { pid: id }
+      })
+    },
     collectInfo(collect) {
       this.$api.app
         .collectMedia({
@@ -142,6 +148,7 @@ export default {
           if (res.status === 'SUCCESS') {
             this.operate.isCollect = res.data.isCollect
             this.infoData = res.data
+            console.log('this.infoData', this.infoData)
             document.title = this.infoData.informationTitle || '角马能源'
           }
         })

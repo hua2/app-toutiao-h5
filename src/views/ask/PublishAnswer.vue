@@ -58,19 +58,21 @@ export default {
       this.$api.ask.findOneDetail({ id: this.id }).then(res => {
         if (res.status === 'SUCCESS') {
           this.form = res.data
-          const pics = this.form.imgsList
-          this.productPicList = pics.map(p => {
-            return {
-              url: p
-            }
-          })
+          if (this.form.imgsList) {
+            const pics = this.form.imgsList
+            this.productPicList = pics.map(p => {
+              return {
+                url: p
+              }
+            })
+          }
         }
       })
     },
     // 发布 编辑草稿箱
     publishDraft(type) {
       if (this.form.title === '') {
-        Toast('请输入问题标题')
+        Toast('请输入标题')
         return
       }
       const pics = this.productPicList.map(p => p.url)
@@ -103,7 +105,7 @@ export default {
     },
     saveInfo(type) {
       if (this.form.title === '') {
-        Toast('请输入问题标题')
+        Toast('请输入标题')
         return
       }
       const pics = this.productPicList.map(p => p.url)
@@ -147,7 +149,6 @@ export default {
             Toast('图片上传失败！')
             this.productPicList.splice(fileIndex, 1)
           }
-          console.log(this.productPicList)
         })
         .catch(() => {
           Toast.clear()

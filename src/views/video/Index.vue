@@ -32,15 +32,15 @@
             <span>草稿箱</span>
           </div>
           <div class="flex justify-around">
-            <div class="p-b-pic">
+            <div class="p-b-pic" @click="$router.push('/ask/publishArticle')">
               <img src="../../assets/image/article-pub-icon.png" alt="">
               <p>发文章</p>
             </div>
-            <div class="p-b-pic">
+            <div class="p-b-pic" @click="$router.push('/ask/publishAnswer')">
               <img src="../../assets/image/ask-pub-icon.png" alt="">
               <p>发提问</p>
             </div>
-            <div class="p-b-pic">
+            <div class="p-b-pic" @click="$router.push('/ask/publishVideo')">
               <img src="../../assets/image/video-pub-icon.png" alt="">
               <p>发视频</p>
             </div>
@@ -65,7 +65,7 @@
               <span>{{ formatTime(v.releaseDate) }}</span>
             </div>
             <div class="video-author">
-              <div class="a-d-logo flex items-center">
+              <div class="a-d-logo flex items-center" @click="authorClick(v.authorId)">
                 <img :src="v.authorLogo" alt="">
                 <span class="ml-6">{{ v.authorName }}</span>
               </div>
@@ -116,6 +116,12 @@ export default {
   created() {
   },
   methods: {
+    authorClick(id) {
+      this.$router.push({
+        path: '/user/personalPage',
+        query: { id: id }
+      })
+    },
     praiseInfo(praise, id) {
       this.$api.app
         .praiseMedia({
@@ -132,11 +138,9 @@ export default {
     showClick() {
       this.show = true
     },
-    onSearch(val) {
-      this.$router.push({
-        path: '/search',
-        query: { keyword: val }
-      })
+    onSearch() {
+      // this.videoListData.pageNumber = 0
+      // this.onLoad()
     },
     onCancel(val) {
       Toast(val)
@@ -155,10 +159,10 @@ export default {
         return
       }
       this.videoListData.loading = true
-      this.videoListData.pageNumber =
-        (this.videoListData.data.length % this.videoListData.pageSize) + 1
+      this.videoListData.pageNumber++
       this.$api.ask
         .findMediaVideo({
+          keywords: this.keyword,
           pageNumber: this.videoListData.pageNumber,
           pageSize: this.videoListData.pageSize
         })
