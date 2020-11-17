@@ -65,7 +65,6 @@ export default {
         })
         .then(res => {
           if (res.status === 'SUCCESS') {
-            console.log(res)
             this.questionData.data = this.questionData.data.concat(res.data.data) // 追加数据
           }
           this.questionData.loading = false

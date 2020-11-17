@@ -48,7 +48,6 @@ export default {
   methods: {
     formatTime,
     editClick(id, type) {
-      console.log(type)
       this.$router.push({
         path: type === 0 ? '/ask/publishArticle' : type === 1 ? '/ask/publishVideo' : type === 2 ? '/ask/publishAnswer' : '',
         query: { id: id }
@@ -69,7 +68,6 @@ export default {
         })
         .then(res => {
           if (res.status === 'SUCCESS') {
-            console.log(res)
             this.draftBoxData.data = this.draftBoxData.data.concat(res.data.data) // 追加数据
           }
           this.draftBoxData.loading = false

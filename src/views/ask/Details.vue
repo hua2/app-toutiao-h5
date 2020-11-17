@@ -151,7 +151,6 @@ export default {
           if (res.status === 'SUCCESS') {
             this.operate.isCollect = res.data.isCollect
             this.infoData = res.data
-            console.log('this.infoData', this.infoData)
             document.title = this.infoData.informationTitle || '角马能源'
           }
         })

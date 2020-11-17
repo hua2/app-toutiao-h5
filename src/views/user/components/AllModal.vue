@@ -79,7 +79,6 @@ export default {
           if (res.data.data.length === 0) {
             this.personalData.finished = true
           }
-          console.log(this.personalData)
         })
     }
   }

@@ -70,7 +70,6 @@ export default {
   },
   created() {
     this.onLoad()
-    console.log(this.keyword)
   },
   methods: {
     formatTime,
@@ -114,11 +113,10 @@ export default {
 
 <style scoped lang="scss">
 .search{
-
   width: 100%;
   height: 100%;
 .search-list {
-  width: 100%;
+    width: 100%;
     padding: 16px;
     margin-bottom: 10px;
     border-bottom: 1px solid #f1f2f6;
