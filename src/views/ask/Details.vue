@@ -1,14 +1,17 @@
 <template>
   <div class="ask-details">
     <ModelTitle title="问答" />
-    <div class="a-d-btn" @click="replyClick(infoData.id)">
-      <img src="../../assets/image/answer-btn.png" alt="">
-    </div>
+<!--    <div class="a-d-btn" @click="replyClick(infoData.id)">-->
+<!--      <img src="../../assets/image/answer-btn.png" alt="">-->
+<!--    </div>-->
     <div class="content-height">
-      <div class="a-d-border">
+      <div class="a-d-border relative">
         <div class="a-d-logo flex items-center">
           <img :src="infoData.authorLogo" alt="">
           <span class="ml-6">{{ infoData.authorName }}</span>
+        </div>
+        <div class="a-d-btn" @click="replyClick(infoData.id)">
+          <img src="../../assets/image/answer-btn.png" alt="">
         </div>
         <h3>{{ infoData.title }}</h3>
         <div class="a-d-author flex justify-between"><span>{{ infoData.answerNum }} 回答</span>
@@ -162,7 +165,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: relative;
+  //position: relative;
   .a-d-btn{
     position: absolute;
     top: 10px;

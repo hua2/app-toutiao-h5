@@ -10,7 +10,7 @@
           @search="onSearch"
           @cancel="onCancel"
         />
-        <img src="../../assets/img/home-apply.png" alt="" @click="showClick">
+        <img src="../../assets/image/home-apply.png" alt="" @click="showClick">
         <span class="ml-6" @click="showClick">发布</span>
         <Popup
           v-model="show"

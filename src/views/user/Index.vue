@@ -17,53 +17,53 @@
       </div>
       <div class="user-info">
         <div class="u-i-title" @click="$router.push('/user/collectPage')">
-          <img src="../../assets/img/heart-icon.png" alt="">
+          <img src="../../assets/image/collect-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>我的收藏</p>
-            <img src="../../assets/img/back-right.png" alt="">
+            <img src="../../assets/image/back-right.png" alt="">
           </div>
         </div>
         <div class="u-i-title" @click="$router.push('/user/attentionPage')">
-          <img src="../../assets/img/heart-icon.png" alt="">
+          <img src="../../assets/image/heart-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>我的关注</p>
-            <img src="../../assets/img/back-right.png" alt="">
+            <img src="../../assets/image/back-right.png" alt="">
           </div>
         </div>
         <div class="u-i-title" @click="$router.push('/user/personalPage')">
-          <img src="../../assets/img/heart-icon.png" alt="">
+          <img src="../../assets/image/personal-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>个人主页</p>
-            <img src="../../assets/img/back-right.png" alt="">
+            <img src="../../assets/image/back-right.png" alt="">
           </div>
         </div>
         <div class="u-i-title" @click="$router.push('/ask/draftBoxList')">
-          <img src="../../assets/img/heart-icon.png" alt="">
+          <img src="../../assets/image/draft-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>草稿箱</p>
-            <img src="../../assets/img/back-right.png" alt="">
+            <img src="../../assets/image/back-right.png" alt="">
           </div>
         </div>
         <div class="u-i-border" />
         <div class="u-i-title" @click="$router.push('/user/aboutPage')">
-          <img src="../../assets/img/about-icon.png" alt="">
+          <img src="../../assets/image/about-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>关于我们</p>
-            <img src="../../assets/img/back-right.png" alt="">
+            <img src="../../assets/image/back-right.png" alt="">
           </div>
         </div>
         <div class="u-i-title" @click="$router.push('/user/advicePage')">
-          <img src="../../assets/img/advice-icon.png" alt="">
+          <img src="../../assets/image/advice-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>意见反馈</p>
-            <img src="../../assets/img/back-right.png" alt="">
+            <img src="../../assets/image/back-right.png" alt="">
           </div>
         </div>
         <div class="u-i-title" @click="$router.push('/user/settingPage')">
-          <img src="../../assets/img/setting-icon.png" alt="">
+          <img src="../../assets/image/setting-icon.png" alt="">
           <div class="u-i-t-icon">
             <p>设置</p>
-            <img src="../../assets/img/back-right.png" alt="">
+            <img src="../../assets/image/back-right.png" alt="">
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default {
     height: 200px;
     position: relative;
     color: #ffffff;
-    background: url("../../assets/img/user-header.png");
+    background: url("../../assets/image/user-header.png");
     background-size: 100% 100%;
     .user-info {
       display: flex;

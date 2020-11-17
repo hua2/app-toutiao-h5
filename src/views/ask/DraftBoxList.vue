@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="draftBox">
     <ModelTitle title="草稿箱" />
     <div class="content-height">
       <List
@@ -8,7 +8,7 @@
         finished-text="没有更多了"
         @load="onLoad"
       >
-        <div v-for="(v,index) in draftBoxData.data" :key="index" class="drafBox-list">
+        <div v-for="(v,index) in draftBoxData.data" :key="index" class="draftBox-list">
           <div class="p-16">
             <h3 @click="editClick(v.id, v.type)">{{ v.title }}</h3>
             <div v-if="v.imgsList && v.imgsList.length === 3" class="d-l-img">
@@ -84,26 +84,30 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.drafBox-list{
-  border-bottom: 1px solid #f1f2f6;
-  .d-l-img{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    img{
-      width: 110px;
-      height: 75px;
+.draftBox{
+  width: 100%;
+  height: 100%;
+  .draftBox-list{
+    border-bottom: 1px solid #f1f2f6;
+    .d-l-img{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      img{
+        width: 110px;
+        height: 75px;
+      }
     }
-  }
-  h3{
-    font-size: 16px;
-    font-weight: 500;
-    color: #050505;
-  }
-  p{
-    font-size: 8px;
-    color: #797676;
-    margin-top: 10px;
+    h3{
+      font-size: 16px;
+      font-weight: 500;
+      color: #050505;
+    }
+    p{
+      font-size: 8px;
+      color: #797676;
+      margin-top: 10px;
+    }
   }
 }
 </style>
