@@ -60,6 +60,19 @@ export default {
     .index-details{
         width: 100%;
         height: 100%;
+      .detail-body{
+        color: #666;
+        width: 100%;
+        text-align: justify;
+        padding: 16px;
+        -webkit-font-smoothing: antialiased;
+        /deep/ p{
+          line-height: 30px;
+          font-size: 16px;
+          margin: 10px 0 20px;
+          word-break: break-all;
+        }
+      }
       .details-footer{
         width: 100%;
         align-items: center;
