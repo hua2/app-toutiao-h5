@@ -13,7 +13,7 @@
       </div>
       <Tabs v-model="active" sticky>
         <Tab title="推荐">
-          <LibraryAllModal />
+          <GalleryAllModal />
         </Tab>
         <Tab
           v-for="(l, index) in libraryData"
@@ -21,21 +21,23 @@
           :title="l.title"
           :name="l.id"
         >
-          <LibraryModal :id="l.id" />
+          <GalleryModal :id="l.id" />
         </Tab>
       </Tabs>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import { Toast, Search, Tabs, Tab } from 'vant'
-import LibraryModal from '@/views/library/components/LibraryModal'
-import LibraryAllModal from '@/views/library/components/LibraryAllModal'
+import GalleryModal from '@/views/gallery/components/GalleryModal'
+import GalleryAllModal from '@/views/gallery/components/GalleryAllModal'
+import Footer from '@/components/Footer/index'
 
 export default {
   name: 'Index',
-  components: { LibraryAllModal, LibraryModal, Search, Tabs, Tab },
+  components: { Footer, GalleryAllModal, GalleryModal, Search, Tabs, Tab },
   data() {
     return {
       active: 0,
@@ -59,7 +61,7 @@ export default {
       // const column = this.libraryData[this.active - 1]
       const column = this.active
       this.$router.push({
-        path: '/search/library',
+        path: '/search/gallery',
         query: { keyword: val, id: column || null }
       })
     },

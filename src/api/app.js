@@ -77,6 +77,12 @@ const app = {
     return axios.get(`/production/getDetail`, { params: params,
       baseURL: 'http://tuku.jiaomaenergy.com/md-api/'
     })
+  },
+  // 图片分类栏目
+  hideList(params) {
+    return axios.get(`/column/hideList`, { params: params,
+      baseURL: 'http://tuku.jiaomaenergy.com/md-api/'
+    })
   }
 }
 export default app

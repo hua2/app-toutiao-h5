@@ -25,6 +25,13 @@
           <img v-else src="../../assets/img/home-ask.png">
         </template>
       </TabbarItem>
+      <TabbarItem replace to="/gallery">
+        <span>图库</span>
+        <template #icon="props">
+          <img v-if="props.active" src="../../assets/image/home-tuku-active.png">
+          <img v-else src="../../assets/image/home-tuku.png">
+        </template>
+      </TabbarItem>
       <TabbarItem replace to="/video">
         <span>视频</span>
         <template #icon="props">

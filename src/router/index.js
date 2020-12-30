@@ -19,6 +19,16 @@ const router = new Router({
         import(/* webpackChunkName: "search" */ '@/views/search/Index.vue')
     },
     {
+      path: '/search/library',
+      component: () =>
+        import(/* webpackChunkName: "search_library" */ '@/views/search/SearchLibrary.vue')
+    },
+    {
+      path: '/search/gallery',
+      component: () =>
+        import(/* webpackChunkName: "search_gallery" */ '@/views/search/SearchGallery.vue')
+    },
+    {
       path: '/detailInfo',
       component: () =>
         import(/* webpackChunkName: "home_detailInfo" */ '@/views/home/DetailInfo.vue')
@@ -67,6 +77,22 @@ const router = new Router({
       path: '/shareVideoDetails/:id/',
       component: () =>
           import(/* webpackChunkName: "details_shareVideoDetails" */ '@/views/details/ShareVideoDetails.vue')
+    },
+    {
+      path: '/library',
+      component: () =>
+          import(/* webpackChunkName: "library" */ '@/views/library/Index.vue'),
+      meta: {
+        title: '能源图库'
+      }
+    },
+    {
+      path: '/library/details',
+      component: () =>
+          import(/* webpackChunkName: "library_details" */ '@/views/library/Details.vue'),
+      meta: {
+        title: '能源图库详情'
+      }
     },
     {
       path: '/history/historyPage',
@@ -125,17 +151,17 @@ const router = new Router({
       }
     },
     {
-      path: '/library',
+      path: '/gallery',
       component: () =>
-          import(/* webpackChunkName: "library" */ '@/views/library/Index.vue'),
+          import(/* webpackChunkName: "gallery" */ '@/views/gallery/Index.vue'),
       meta: {
         title: '能源图库'
       }
     },
     {
-      path: '/library/details',
+      path: '/gallery/details',
       component: () =>
-          import(/* webpackChunkName: "library_details" */ '@/views/library/Details.vue'),
+          import(/* webpackChunkName: "gallery_details" */ '@/views/gallery/Details.vue'),
       meta: {
         title: '能源图库详情'
       }
@@ -374,6 +400,8 @@ const whiteList = [
   '/',
   '/login',
   '/search',
+  '/search/library',
+  '/search/gallery',
   '/ask',
   '/ask/details',
   '/history/historyPage',
@@ -382,6 +410,8 @@ const whiteList = [
   '/video',
   '/library',
   '/library/details',
+  '/gallery',
+  '/gallery/details',
   '/login/agreement',
   '/login/userPage',
   '/detailInfo'
