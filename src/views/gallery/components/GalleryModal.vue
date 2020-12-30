@@ -75,7 +75,7 @@ export default {
     },
     gotoDetail(id) {
       this.$router.push({
-        path: '/library/details',
+        path: '/gallery/details',
         query: { id: id }
       })
     }
