@@ -59,6 +59,24 @@ const app = {
         headers: { 'jm-token': store.state.user.token }
       }
     )
+  },
+  // 图片查询首页
+  indexProduct(params) {
+    return axios.get(`/production/search`, { params: params,
+      baseURL: 'http://tuku.jiaomaenergy.com/md-api/'
+    })
+    // return axios({
+    //   method: 'get',
+    //   params: params,
+    //   url: '/production/search',
+    //   baseURL: 'http://tuku.jiaomaenergy.com/md-api/'
+    // })
+  },
+  // 图片详情
+  getDetail(params) {
+    return axios.get(`/production/getDetail`, { params: params,
+      baseURL: 'http://tuku.jiaomaenergy.com/md-api/'
+    })
   }
 }
 export default app

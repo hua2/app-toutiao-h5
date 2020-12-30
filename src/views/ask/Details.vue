@@ -1,9 +1,9 @@
 <template>
   <div class="ask-details">
     <ModelTitle title="问答" />
-<!--    <div class="a-d-btn" @click="replyClick(infoData.id)">-->
-<!--      <img src="../../assets/image/answer-btn.png" alt="">-->
-<!--    </div>-->
+    <!--    <div class="a-d-btn" @click="replyClick(infoData.id)">-->
+    <!--      <img src="../../assets/image/answer-btn.png" alt="">-->
+    <!--    </div>-->
     <div class="content-height">
       <div class="a-d-border relative">
         <div class="a-d-logo flex items-center">

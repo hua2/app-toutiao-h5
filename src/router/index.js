@@ -125,6 +125,22 @@ const router = new Router({
       }
     },
     {
+      path: '/library',
+      component: () =>
+          import(/* webpackChunkName: "library" */ '@/views/library/Index.vue'),
+      meta: {
+        title: '能源图库'
+      }
+    },
+    {
+      path: '/library/details',
+      component: () =>
+          import(/* webpackChunkName: "library_details" */ '@/views/library/Details.vue'),
+      meta: {
+        title: '能源图库详情'
+      }
+    },
+    {
       path: '/video',
       component: () =>
         import(/* webpackChunkName: "video" */ '@/views/video/Index.vue'),
@@ -364,6 +380,8 @@ const whiteList = [
   '/history/moreHistory',
   '/history/settledPage',
   '/video',
+  '/library',
+  '/library/details',
   '/login/agreement',
   '/login/userPage',
   '/detailInfo'

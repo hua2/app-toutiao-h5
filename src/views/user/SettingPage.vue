@@ -1,14 +1,14 @@
 <template>
   <div class="setting-page">
-    <ModelTitle title="设置"/>
-   <div class="s-p-btn">
-     <button @click="exitLogout">退出登录</button>
-   </div>
+    <ModelTitle title="设置" />
+    <div class="s-p-btn">
+      <button @click="exitLogout">退出登录</button>
+    </div>
   </div>
 </template>
 
 <script>
-import ModelTitle from "@/components/ModelTitle/index";
+import ModelTitle from '@/components/ModelTitle/index'
 /**
  * 我的(设置)模块
  * @author lyh
@@ -17,7 +17,7 @@ import ModelTitle from "@/components/ModelTitle/index";
 
 export default {
   name: 'SettingPage',
-  components: {ModelTitle},
+  components: { ModelTitle },
   methods: {
     // 退出登录
     exitLogout() {
